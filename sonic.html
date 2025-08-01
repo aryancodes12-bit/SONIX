@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SONIX</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:ital,wght@0,400;1,400&family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- Custom Styling -->
+  <style>
+    @keyframes fadeUp {
+      from {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes blink {
+      0%, 50% {
+        opacity: 1;
+      }
+      51%, 100% {
+        opacity: 0.2;
+      }
+    }
+
+    @keyframes jumpFade {
+      0% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      50% {
+        transform: translateY(-5px);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .fade-up {
+      animation: fadeUp 1s ease forwards;
+      opacity: 0;
+    }
+
+    .blink-slow {
+      animation: blink 2s infinite;
+    }
+
+    .jump-hover:hover {
+      animation: jumpFade 0.4s ease-in-out;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #0f1116;
+    }
+
+    .italic-roboto-slab {
+      font-family: 'Roboto Slab', serif;
+      font-style: italic;
+    }
+
+    .hover-animate {
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    .hover-animate:hover {
+      transform: scale(1.05);
+      color: #22c55e;
+    }
+ 
+  @keyframes marquee {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+  .animate-marquee {
+    display: inline-block;
+    white-space: nowrap;
+    animation: marquee 30s linear infinite;
+  }
+ 
+  .ripple-card {
+    position: relative;
+    overflow: hidden;
+    filter: grayscale(100%);
+    transition: filter 0.5s ease;
+  }
+
+  .ripple-card::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.2) 10%, transparent 11%);
+    background-size: 10% 10%;
+    animation: ripple 2s linear infinite;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+  }
+
+  .ripple-card:hover {
+    filter: grayscale(0%);
+  }
+
+  .ripple-card:hover::after {
+    opacity: 1;
+  }
+
+  @keyframes ripple {
+    0% { background-position: 0 0; }
+    100% { background-position: 100% 100%; }
+  }
+.team-and-contact {
+  display: grid;
+  place-items: center;
+}
+
+
+  </style>
+
+
+
+</head>
+<body class="bg-[#0f1116] text-white">
+  <!-- Loader Section -->
+  <div class="flex flex-col items-center justify-center min-h-screen px-4 pt-28" id="loader">
+    <div class="text-left space-y-4 max-w-5xl w-full">
+      <div class="flex flex-wrap items-start gap-x-2 gap-y-1 fade-up" style="animation-delay: 0.5s;">
+        <p id="counter" class="italic-roboto-slab text-[18px] leading-none mt-1 text-gray-400 select-none">0 - 100</p>
+        <p class="font-bold text-[48px] leading-[1.1] select-none">TUNING</p>
+      </div>
+      <p class="fade-up text-[48px] leading-[1.1] font-light text-gray-400 select-none" style="animation-delay: 1.5s;">YOUR</p>
+      <p class="fade-up font-bold text-[48px] leading-[1.1] select-none" style="animation-delay: 2.2s;">SOUND</p>
+      <p class="fade-up italic-roboto-slab text-[48px] leading-[1.1] font-light text-gray-400 select-none" style="animation-delay: 2.9s;">EXPERIENCE</p>
+      <p class="fade-up italic-roboto-slab text-[48px] leading-[1.1] font-light text-green-400 select-none blink-slow" style="animation-delay: 3.6s;">NOW</p>
+      <p class="fade-up text-[10px] font-light text-gray-500 mt-6 select-none" style="animation-delay: 4.2s;">
+        Please wait<br />
+        a few seconds.
+      </p>
+    </div>
+  </div>
+<!-- Main Content (hidden initially) -->
+  <div id="main-content" class="hidden">
+    <!-- Navbar -->
+    <nav class="w-full bg-[#0f1116] text-white px-6 py-4 flex justify-between items-center shadow-md fixed top-0 z-50">
+      <h1 class="text-2xl font-bold tracking-wide text-green-400 italic">SONIX</h1>
+      <ul class="hidden md:flex space-x-8 text-sm font-medium">
+
+   <ul class="hidden md:flex space-x-8 text-sm font-medium">
+  <li><a href="#home" class="hover:text-green-400 transform transition duration-300 hover:scale-110">Home</a></li>
+  <li><a href="#browse" class="hover:text-green-400 transform transition duration-300 hover:scale-110">Browse</a></li>
+  <li><a href="#Artists" class="hover:text-green-400 transform transition duration-300 hover:scale-110">Artists</a></li>
+  <li><a href="#team" class="hover:text-green-400 transform transition duration-300 hover:scale-110">Team</a></li>
+  <li><a href="#contact" class="hover:text-green-400 transform transition duration-300 hover:scale-110">Contact</a></li>
+</ul>
+
+  </nav>
+</div>
+
+
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-[#0f1116] text-white px-6 pt-20 pb-4 space-y-4">
+      <a href="#" class="block hover:text-green-400 jump-hover">Home</a>
+      <a href="#" class="block hover:text-green-400 jump-hover">Browse</a>
+      <a href="#" class="block hover:text-green-400 jump-hover">Artists</a>
+      <a href="#" class="block hover:text-green-400 jump-hover">Team</a>
+      <a href="#" class="block hover:text-green-400 jump-hover">Contact</a>
+    </div>
+
+    <!-- Welcome Section -->
+     
+   <div id="welcome" class="opacity-0 transition-opacity duration-700 text-center pt-32 pb-24">
+  <h1 class="text-4xl font-bold mb-2 hover-animate">
+    Welcome to <span class="italic text-green-400">SONIX</span>
+  </h1>
+  <p class="text-gray-400">Your music journey starts here 🎧</p>
+</div>
+
+
+<!-- Browse Section -->
+<section id="browse" class="transition-section">
+  <h2 class="text-4xl font-bold text-center mb-10 hover:text-green-400 transition duration-300 ease-in-out hover:shadow-[0_0_10px_#22c55e]">
+    Browse Your Vibes
+  </h2>
+
+   
+ <div class="overflow-hidden whitespace-nowrap relative">
+    <!-- Marquee Inner Content (duplicated for seamless loop) -->
+    <div class="inline-flex animate-marquee space-x-6">
+    
+    <!-- Song Card Template -->
+    
+    <div class="w-48 bg-gray-800 rounded-lg overflow-hidden transform transition duration-300 hover:scale-110 hover:shadow-lg hover:shadow-green-400 cursor-pointer">
+      <img src="https://i.ytimg.com/vi/KJTWOYUUH7w/maxresdefault.jpg" class="w-full h-32 object-cover rounded" />
+      <div class="mt-2">
+        <p class="text-white font-semibold text-sm break-words">Tera Hone Laga Hoon</p>
+        <p class="text-gray-400 text-xs break-words">Atif Aslam</p>
+      </div>
+    </div>
+
+    <div class="w-48 bg-gray-800 rounded-lg overflow-hidden transform transition duration-300 hover:scale-110 hover:shadow-lg hover:shadow-purple-400 cursor-pointer">
+      <img src="https://tse3.mm.bing.net/th/id/OIP.0onNgPKRxQ3yjQuQ-HOZjAAAAA?rs=1&pid=ImgDetMain&o=7&rm=3" class="w-full h-32 object-cover rounded" />
+      <div class="mt-2">
+        <p class="text-white font-semibold text-sm break-words">Jab Tak</p>
+        <p class="text-gray-400 text-xs break-words">Armaan Malik</p>
+      </div>
+    </div>
+
+    <div class="w-48 bg-gray-800 rounded-lg overflow-hidden transform transition duration-300 hover:scale-110 hover:shadow-lg hover:shadow-pink-500 cursor-pointer">
+      <img src="https://tse1.mm.bing.net/th/id/OIP.oyM3O76OL5htQxpD8bnTAwHaEK?rs=1&pid=ImgDetMain&o=7&rm=3" class="w-full h-32 object-cover rounded" />
+      <div class="mt-2">
+        <p class="text-white font-semibold text-sm break-words">Tum Mile</p>
+        <p class="text-gray-400 text-xs break-words">Pritam</p>
+      </div>
+    </div>
+
+    <div class="w-48 bg-gray-800 rounded-lg overflow-hidden transform transition duration-300 hover:scale-110 hover:shadow-lg hover:shadow-yellow-400 cursor-pointer">
+      <img src="https://i.ytimg.com/vi/h4aoIbOpO9k/maxresdefault.jpg" class="w-full h-32 object-cover rounded" />
+      <div class="mt-2">
+        <p class="text-white font-semibold text-sm break-words">Kaise Hua</p>
+        <p class="text-gray-400 text-xs break-words">Vishal Mishra</p>
+      </div>
+    </div>
+
+ <div class="w-48 bg-gray-800 rounded-lg overflow-hidden transform transition duration-300 hover:scale-110 hover:shadow-lg hover:shadow-green-400 cursor-pointer">
+      <img src="https://wallpaperaccess.com/full/5134849.jpg" class="w-full h-32 object-cover rounded" />
+      <div class="mt-2">
+        <p class="text-white font-semibold text-sm break-words">Raabta</p>
+        <p class="text-gray-400 text-xs break-words">Arijit Singh</p>
+      </div>
+    </div>
+
+    <div class="w-48 bg-gray-800 rounded-lg overflow-hidden transform transition duration-300 hover:scale-110 hover:shadow-lg hover:shadow-purple-400 cursor-pointer">
+      <img src="https://i.pinimg.com/originals/a5/d8/99/a5d8994d174e8b2e1095868e453d6fe1.jpg" class="w-full h-32 object-cover rounded" />
+      <div class="mt-2">
+        <p class="text-white font-semibold text-sm break-words">Hamsafar</p>
+        <p class="text-gray-400 text-xs break-words">Akhil Sachdeva</p>
+      </div>
+    </div>
+
+    <div class="w-48 bg-gray-800 rounded-lg overflow-hidden transform transition duration-300 hover:scale-110 hover:shadow-lg hover:shadow-pink-500 cursor-pointer">
+      <img src="https://i.ytimg.com/vi/yyUodifWNxU/maxresdefault.jpg" class="w-full h-32 object-cover rounded" />
+      <div class="mt-2">
+        <p class="text-white font-semibold text-sm break-words">Jugrafiya</p>
+        <p class="text-gray-400 text-xs break-words">Udit Narayan & Shreya Ghoshal</p>
+      </div>
+    </div>
+    <div class="w-48 bg-gray-800 rounded-lg overflow-hidden transform transition duration-300 hover:scale-110 hover:shadow-lg hover:shadow-yellow-400 cursor-pointer">
+      <img src="https://tse3.mm.bing.net/th/id/OIP.GxXC_j84YHYDI3ZV0VVJXgHaE8?rs=1&pid=ImgDetMain&o=7&rm=3" class="w-full h-32 object-cover rounded" />
+      <div class="mt-2">
+        <p class="text-white font-semibold text-sm break-words">Jeena Jeena</p>
+        <p class="text-gray-400 text-xs break-words">Atif Aslam</p>
+      </div>
+    </div>
+
+ <div class="w-48 bg-gray-800 rounded-lg overflow-hidden transform transition duration-300 hover:scale-110 hover:shadow-lg hover:shadow-green-400 cursor-pointer">
+      <img src="https://tse3.mm.bing.net/th/id/OIP.mjLcECoM9rCr8jpTbskPtQHaGe?rs=1&pid=ImgDetMain&o=7&rm=3" class="w-full h-32 object-cover rounded" />
+      <div class="mt-2">
+        <p class="text-white font-semibold text-sm break-words">Tere Bin</p>
+        <p class="text-gray-400 text-xs break-words">Rahat Fateh Ali Khan</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- Popular Artists Section -->
+
+<section id="artists" class="pt-20 pb-16 px-6 bg-[#0f0f0f] text-white">
+  <h2 class="text-4xl font-bold text-center mb-10 hover:text-blue-400 transition duration-300 ease-in-out hover:shadow-[0_0_10px_#3b82f6]">
+    Popular Artists
+  </h2>
+
+  <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+    
+    <!-- Artist Card -->
+    <div class="group relative overflow-hidden rounded-lg shadow-lg cursor-pointer">
+      <img src="https://www.njpac.org/wp-content/uploads/2022/02/800x600_Atif_Aslam_onsale.jpg"
+           alt="Atif Aslam"
+           class="w-full h-60 object-cover grayscale group-hover:grayscale-0 transition duration-700 ease-in-out group-hover:scale-110" />
+      <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-30 transition duration-700"></div>
+      <p class="absolute bottom-2 left-0 right-0 text-center text-lg font-semibold text-white bg-black bg-opacity-50 py-1">
+        Atif Aslam
+      </p>
+    </div>
+
+    <!-- Repeat this structure for more artists -->
+    <div class="group relative overflow-hidden rounded-lg shadow-lg cursor-pointer">
+      <img src="https://res.cloudinary.com/dwzmsvp7f/image/upload/f_auto/c_crop%2Cg_custom/v1728462701/yiwwlrbe78ahhohjjmum.jpg"
+           alt="Arijit Singh"
+           class="w-full h-60 object-cover grayscale group-hover:grayscale-0 transition duration-700 ease-in-out group-hover:scale-110" />
+      <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-30 transition duration-700"></div>
+      <p class="absolute bottom-2 left-0 right-0 text-center text-lg font-semibold text-white bg-black bg-opacity-50 py-1">
+        Arijit Singh
+      </p>
+    </div>
+
+    <div class="group relative overflow-hidden rounded-lg shadow-lg cursor-pointer">
+      <img src="https://i.scdn.co/image/ab6761610000e5eb36a7262247318ff0f1ad00da"
+           alt="Shreya Ghoshal"
+           class="w-full h-60 object-cover grayscale group-hover:grayscale-0 transition duration-700 ease-in-out group-hover:scale-110" />
+      <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-30 transition duration-700"></div>
+      <p class="absolute bottom-2 left-0 right-0 text-center text-lg font-semibold text-white bg-black bg-opacity-50 py-1">
+        Shreya Ghoshal
+      </p>
+    </div>
+
+    <div class="group relative overflow-hidden rounded-lg shadow-lg cursor-pointer">
+      <img src="https://images.filmibeat.com/img/2025/07/armaanfeature-1753533633.jpg"
+           alt="Armaan Malik"
+           class="w-full h-60 object-cover grayscale group-hover:grayscale-0 transition duration-700 ease-in-out group-hover:scale-110" />
+      <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-30 transition duration-700"></div>
+      <p class="absolute bottom-2 left-0 right-0 text-center text-lg font-semibold text-white bg-black bg-opacity-50 py-1">
+        Armaan Malik
+      </p>
+    </div>
+
+    <div class="group relative overflow-hidden rounded-lg shadow-lg cursor-pointer">
+      <img src="https://feeds.abplive.com/onecms/images/uploaded-images/2022/01/11/b246e3df7c15e7b6456d13874de912de_original.png"
+           alt="Lata Mangeshkar"
+           class="w-full h-60 object-cover grayscale group-hover:grayscale-0 transition duration-700 ease-in-out group-hover:scale-110" />
+      <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-30 transition duration-700"></div>
+      <p class="absolute bottom-2 left-0 right-0 text-center text-lg font-semibold text-white bg-black bg-opacity-50 py-1">
+       Lata Mangeshkar
+      </p>
+    </div>
+
+  </div>
+  <!-- Our Team Section -->
+<section id="team" class="py-16 px-6 bg-[#0f1117] text-white">
+  <h2 class="text-4xl font-bold text-center mb-12 hover:text-green-400 transition duration-300 ease-in-out hover:shadow-[0_0_10px_#22c55e]">
+    Our Team
+  </h2>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl mx-auto text-center">
+
+    <!-- Team Member 1 -->
+    <div class="relative group py-4 border border-gray-700 rounded-lg hover:border-green-400 transition">
+      <p class="text-2xl font-semibold group-hover:text-green-400 transition">Aryan Jaiswal</p>
+      <p class="text-gray-400">Developer</p>
+      <img src="member_1.jpg"
+           alt="Aryan Jaiswal"
+           class="absolute -top-36 left-1/2 -translate-x-1/2 scale-0 group-hover:scale-100 transition-transform duration-500 w-32 h-32 rounded-full border-4 border-green-400 shadow-xl z-10 bg-[#0f1117]" />
+    </div>
+
+    <!-- Team Member 2 -->
+    <div class="relative group py-4 border border-gray-700 rounded-lg hover:border-green-400 transition">
+      <p class="text-2xl font-semibold group-hover:text-green-400 transition">Alok Jha</p>
+      <p class="text-gray-400">Designer</p>
+      <img src="member_2.jpg"
+           alt="Alok Jha"
+           class="absolute -top-36 left-1/2 -translate-x-1/2 scale-0 group-hover:scale-100 transition-transform duration-500 w-32 h-32 rounded-full border-4 border-green-400 shadow-xl z-10 bg-[#0f1117]" />
+    </div>
+<!-- Contact Section -->
+<section id="contact" class="py-20 px-6 bg-[#0f1117] text-white">
+  <h2 class="text-4xl font-bold text-center mb-10 hover:text-green-400 transition duration-300 ease-in-out hover:shadow-[0_0_10px_#22c55e]">
+    Contact Us
+  </h2>
+
+  <div class="max-w-xl mx-auto bg-[#1a1c22] p-8 rounded-lg shadow-lg">
+    <form id="contactForm" class="space-y-6">
+      <!-- Name -->
+      <div>
+        <label class="block mb-2 font-medium">Name</label>
+        <input type="text" name="name" required
+               class="w-full px-4 py-2 rounded-lg bg-[#111318] text-white focus:outline-none focus:ring-2 focus:ring-green-400 hover:shadow-[0_0_10px_#22c55e] transition duration-300" />
+      </div>
+
+      <!-- Email -->
+      <div>
+        <label class="block mb-2 font-medium">Email</label>
+        <input type="email" name="email" required
+               class="w-full px-4 py-2 rounded-lg bg-[#111318] text-white focus:outline-none focus:ring-2 focus:ring-green-400 hover:shadow-[0_0_10px_#22c55e] transition duration-300" />
+      </div>
+
+      <!-- Message -->
+      <div>
+        <label class="block mb-2 font-medium">Your Message</label>
+        <textarea name="message" rows="4" required
+                  class="w-full px-4 py-2 rounded-lg bg-[#111318] text-white focus:outline-none focus:ring-2 focus:ring-green-400 hover:shadow-[0_0_10px_#22c55e] transition duration-300"></textarea>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="text-center">
+        <button type="submit"
+                class="px-8 py-2 rounded-lg bg-green-500 text-white font-semibold hover:bg-green-600 transition duration-300 shadow-md hover:shadow-[0_0_15px_#22c55e]">
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
+
+
+
+  <script>
+    let count = 0;
+    const counter = document.getElementById("counter");
+    const interval = setInterval(() => {
+      count++;
+      counter.innerText = `${count} - 100`;
+      if (count >= 100) clearInterval(interval);
+    }, 25);
+
+    setTimeout(() => {
+      document.getElementById("loader").style.display = "none";
+      const mainContent = document.getElementById("main-content");
+      mainContent.classList.remove("hidden");
+
+      const welcome = document.getElementById("welcome");
+      setTimeout(() => {
+        welcome.classList.add("opacity-100");
+      }, 100);
+    }, 5000);
+
+    const toggle = document.getElementById("menu-toggle");
+    const mobileMenu = document.getElementById("mobile-menu");
+    toggle.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+    });
+  </script>
+  <script>
+  document.getElementById('contactForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    alert("Your message has been sent. Thanks for contacting us!");
+    this.reset();
+  });
+
+</script>
+</body>
+</html> 
