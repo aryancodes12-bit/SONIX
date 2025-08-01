@@ -5,7 +5,7 @@ Welcome to **SONIX**, a sleek and interactive music-themed web experience design
 ---
 
 ## 🚀 Live Demo
-🔗 [Check out the live site]((https://sonixapp.vercel.app/))  
+🔗 [Check out the live site](https://sonixapp.vercel.app/)  
 *(Replace with your deployed URL)*
 
 ---
