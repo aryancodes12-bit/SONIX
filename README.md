@@ -9,6 +9,10 @@ Welcome to **SONIX**, a sleek and interactive music-themed web experience design
 *(Replace with your deployed URL)*
 
 ---
+## 🌐 Website Screenshot
+
+![Website Preview](website image/home.png)
+
 
 ## ✨ Features
 
