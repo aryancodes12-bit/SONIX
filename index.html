@@ -81,6 +81,8 @@
       color: #22c55e;
     }
  
+
+
   @keyframes marquee {
     0% {
       transform: translateX(100%);
@@ -89,11 +91,41 @@
       transform: translateX(-100%);
     }
   }
+
   .animate-marquee {
-    display: inline-block;
-    white-space: nowrap;
-    animation: marquee 30s linear infinite;
+    animation: marquee 39s linear infinite;
   }
+
+  .pause-marquee {
+    animation-play-state: paused !important;
+  }
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center; /* horizontally center items */
+  padding: 1rem;
+  border-radius: 0.75rem;
+  background-color: #1c1c1c;
+  color: white;
+  height: 200px; /* adjust as needed */
+}
+
+.play-button {
+  margin-top: auto;
+  background-color: #22c55e;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  border: none;
+  cursor: pointer;
+}
+
+
+
+
+
+
  
   .ripple-card {
     position: relative;
@@ -133,6 +165,164 @@
   place-items: center;
 }
 
+/* Glassy Navbar */
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Navbar */
+.nav-glass {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(20, 20, 20, 0.5);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+  z-index: 999;
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-logo {
+  font-size: 28px;
+  font-weight: 900;
+  color: #ffffff;
+  text-shadow: 0 0 10px #00f0ff;
+  letter-spacing: 2px;
+}
+
+/* Menu Items */
+.nav-menu {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+}
+
+.nav-menu li a {
+  text-decoration: none;
+  color: #f0f0f0;
+  font-weight: 500;
+  font-size: 16px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  transition: 0.3s;
+  position: relative;
+}
+
+.nav-menu li a::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 3px;
+  bottom: 0;
+  left: 50%;
+  background: linear-gradient(90deg, #ff3cac, #784ba0);
+  transition: 0.4s ease;
+  border-radius: 50px;
+}
+
+.nav-menu li a:hover {
+  color: #ff3cac;
+}
+
+.nav-menu li a:hover::after {
+  width: 100%;
+  left: 0;
+}
+
+/* Sign In Button */
+.nav-btn {
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #ff3cac, #784ba0);
+  border: none;
+  border-radius: 30px;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 0 15px #ff3cac;
+  transition: transform 0.3s ease;
+}
+
+.nav-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 25px #ff3cac;
+}
+
+/* Hamburger Menu */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+  margin-left: 20px;
+}
+
+.hamburger span {
+  width: 24px;
+  height: 3px;
+  background: white;
+  border-radius: 2px;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .nav-menu {
+    display: none;
+    position: absolute;
+    top: 70px;
+    right: 24px;
+    background: rgba(10, 10, 10, 0.9);
+    padding: 20px;
+    flex-direction: column;
+    gap: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(255, 60, 172, 0.4);
+    animation: fadeIn 0.3s ease forwards;
+  }
+
+  .nav-menu.active {
+    display: flex;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+ html {
+      scroll-behavior: smooth;
+    }
+
+    .page-section {
+      @apply min-h-screen flex items-center justify-center text-white text-4xl opacity-0 translate-y-5 transition-all duration-700 ease-in-out;
+    }
+
+    .page-section.visible {
+      @apply opacity-100 translate-y-0;
+    }
+
+
+
 
   </style>
 
@@ -160,31 +350,34 @@
 <!-- Main Content (hidden initially) -->
   <div id="main-content" class="hidden">
     <!-- Navbar -->
-    <nav class="w-full bg-[#0f1116] text-white px-6 py-4 flex justify-between items-center shadow-md fixed top-0 z-50">
-      <h1 class="text-2xl font-bold tracking-wide text-green-400 italic">SONIX</h1>
-      <ul class="hidden md:flex space-x-8 text-sm font-medium">
+  <nav class="w-full bg-[#0f1116] text-white px-6 py-4 flex justify-between items-center shadow-md fixed top-0 z-50">
+    <div class="nav-container flex justify-between items-center w-full">
+      <div class="nav-logo text-xl font-bold">🎧 SONIX</div>
+      <ul class="nav-menu flex gap-8" id="navLinks">
+        <li><a href="#welcome" class="hover:underline">Home</a></li>
+        <li><a href="#browse" class="hover:underline">Explore</a></li>
+        <li><a href="#artists" class="hover:underline">Artists</a></li>
+        <li><a href="#team" class="hover:underline">Team</a></li>
+        <li><a href="#contact" class="hover:underline">Contact us</a></li>
+      </ul>
+      <div class="nav-controls flex items-center gap-4">
+     <button onclick="openModal()" class="nav-btn bg-gradient-to-r from-pink-500 to-purple-600 text-white px-5 py-2 rounded-md font-semibold shadow-lg hover:opacity-90">
+  Sign In
+</button>
 
-   <ul class="hidden md:flex space-x-8 text-sm font-medium">
-  <li><a href="#home" class="hover:text-green-400 transform transition duration-300 hover:scale-110">Home</a></li>
-  <li><a href="#browse" class="hover:text-green-400 transform transition duration-300 hover:scale-110">Browse</a></li>
-  <li><a href="#Artists" class="hover:text-green-400 transform transition duration-300 hover:scale-110">Artists</a></li>
-  <li><a href="#team" class="hover:text-green-400 transform transition duration-300 hover:scale-110">Team</a></li>
-  <li><a href="#contact" class="hover:text-green-400 transform transition duration-300 hover:scale-110">Contact</a></li>
-</ul>
 
+        <div class="hamburger hidden md:block cursor-pointer" onclick="toggleMenu()">
+          <span class="block w-6 h-0.5 bg-white mb-1"></span>
+          <span class="block w-6 h-0.5 bg-white mb-1"></span>
+          <span class="block w-6 h-0.5 bg-white"></span>
+        </div>
+      </div>
+    </div>
   </nav>
+     
 </div>
 
 
-
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="hidden md:hidden bg-[#0f1116] text-white px-6 pt-20 pb-4 space-y-4">
-      <a href="#" class="block hover:text-green-400 jump-hover">Home</a>
-      <a href="#" class="block hover:text-green-400 jump-hover">Browse</a>
-      <a href="#" class="block hover:text-green-400 jump-hover">Artists</a>
-      <a href="#" class="block hover:text-green-400 jump-hover">Team</a>
-      <a href="#" class="block hover:text-green-400 jump-hover">Contact</a>
-    </div>
 
     <!-- Welcome Section -->
      
@@ -197,90 +390,150 @@
 
 
 <!-- Browse Section -->
+ 
 <section id="browse" class="transition-section">
   <h2 class="text-4xl font-bold text-center mb-10 hover:text-green-400 transition duration-300 ease-in-out hover:shadow-[0_0_10px_#22c55e]">
     Browse Your Vibes
   </h2>
 
-   
- <div class="overflow-hidden whitespace-nowrap relative">
-    <!-- Marquee Inner Content (duplicated for seamless loop) -->
-    <div class="inline-flex animate-marquee space-x-6">
-    
-    <!-- Song Card Template -->
-    
-    <div class="w-48 bg-gray-800 rounded-lg overflow-hidden transform transition duration-300 hover:scale-110 hover:shadow-lg hover:shadow-green-400 cursor-pointer">
-      <img src="https://i.ytimg.com/vi/KJTWOYUUH7w/maxresdefault.jpg" class="w-full h-32 object-cover rounded" />
-      <div class="mt-2">
+     <!-- Song Card Template -->
+<!-- Hidden audio player -->
+<audio id="audio-player" controls style="display: none;"></audio>
+
+<!-- Marquee container -->
+<div class="w-full overflow-hidden py-4 border-y border-gray-700">
+  <div class="flex space-x-6 animate-marquee w-max">
+  
+    <!-- Song Card 1 -->
+    <div class="song-item w-48 bg-gray-800 rounded-lg overflow-hidden transform transition duration-300 hover:scale-110 hover:shadow-lg hover:shadow-green-400 cursor-pointer"
+         data-src="assets/music/song_1.mp3">
+      <img src="assets1/pictures/pict_1.jpg" class="w-full h-32 object-cover rounded" />
+      <div class="mt-2 flex flex-col items-center">
         <p class="text-white font-semibold text-sm break-words">Tera Hone Laga Hoon</p>
         <p class="text-gray-400 text-xs break-words">Atif Aslam</p>
+       <button class="play-btn w-24 bg-green-500 px-2 py-1 mt-2 text-sm rounded hover:bg-green-600 transition">Play</button>
+
       </div>
     </div>
 
-    <div class="w-48 bg-gray-800 rounded-lg overflow-hidden transform transition duration-300 hover:scale-110 hover:shadow-lg hover:shadow-purple-400 cursor-pointer">
+
+    <div class="w-48 bg-gray-800 rounded-lg overflow-hidden transform transition duration-300 hover:scale-110 hover:shadow-lg hover:shadow-purple-400 cursor-pointer"
+     data-src="assets/music/song_2.mp3">
       <img src="https://tse3.mm.bing.net/th/id/OIP.0onNgPKRxQ3yjQuQ-HOZjAAAAA?rs=1&pid=ImgDetMain&o=7&rm=3" class="w-full h-32 object-cover rounded" />
-      <div class="mt-2">
+      <div class="mt-2 flex flex-col items-center">
         <p class="text-white font-semibold text-sm break-words">Jab Tak</p>
         <p class="text-gray-400 text-xs break-words">Armaan Malik</p>
+        <button class="play-btn w-24 bg-green-500 px-2 py-1 mt-2 text-sm rounded hover:bg-green-600 transition">Play</button>
       </div>
     </div>
 
-    <div class="w-48 bg-gray-800 rounded-lg overflow-hidden transform transition duration-300 hover:scale-110 hover:shadow-lg hover:shadow-pink-500 cursor-pointer">
+    <div class="w-48 bg-gray-800 rounded-lg overflow-hidden transform transition duration-300 hover:scale-110 hover:shadow-lg hover:shadow-pink-500 cursor-pointer"
+      data-src="assets/music/song_3.mp3">
       <img src="https://tse1.mm.bing.net/th/id/OIP.oyM3O76OL5htQxpD8bnTAwHaEK?rs=1&pid=ImgDetMain&o=7&rm=3" class="w-full h-32 object-cover rounded" />
-      <div class="mt-2">
+      <div class="mt-2 flex flex-col items-center">
         <p class="text-white font-semibold text-sm break-words">Tum Mile</p>
         <p class="text-gray-400 text-xs break-words">Pritam</p>
+        <button class="play-btn w-24 bg-green-500 px-2 py-1 mt-2 text-sm rounded hover:bg-green-600 transition">Play</button>
       </div>
     </div>
 
-    <div class="w-48 bg-gray-800 rounded-lg overflow-hidden transform transition duration-300 hover:scale-110 hover:shadow-lg hover:shadow-yellow-400 cursor-pointer">
+    <div class="w-48 bg-gray-800 rounded-lg overflow-hidden transform transition duration-300 hover:scale-110 hover:shadow-lg hover:shadow-yellow-400 cursor-pointer"
+      data-src="assets/music/song_4.mp3">
       <img src="https://i.ytimg.com/vi/h4aoIbOpO9k/maxresdefault.jpg" class="w-full h-32 object-cover rounded" />
-      <div class="mt-2">
+      <div class="mt-2 flex flex-col items-center">
         <p class="text-white font-semibold text-sm break-words">Kaise Hua</p>
         <p class="text-gray-400 text-xs break-words">Vishal Mishra</p>
+        <button class="play-btn w-24 bg-green-500 px-2 py-1 mt-2 text-sm rounded hover:bg-green-600 transition">Play</button>
       </div>
     </div>
 
- <div class="w-48 bg-gray-800 rounded-lg overflow-hidden transform transition duration-300 hover:scale-110 hover:shadow-lg hover:shadow-green-400 cursor-pointer">
+ <div class="w-48 bg-gray-800 rounded-lg overflow-hidden transform transition duration-300 hover:scale-110 hover:shadow-lg hover:shadow-green-400 cursor-pointer"
+      data-src="assets/music/song_5.mp3">
       <img src="https://wallpaperaccess.com/full/5134849.jpg" class="w-full h-32 object-cover rounded" />
-      <div class="mt-2">
+      <div class="mt-2 flex flex-col items-center">
         <p class="text-white font-semibold text-sm break-words">Raabta</p>
         <p class="text-gray-400 text-xs break-words">Arijit Singh</p>
+        <button class="play-btn w-24 bg-green-500 px-2 py-1 mt-2 text-sm rounded hover:bg-green-600 transition">Play</button>
       </div>
     </div>
 
-    <div class="w-48 bg-gray-800 rounded-lg overflow-hidden transform transition duration-300 hover:scale-110 hover:shadow-lg hover:shadow-purple-400 cursor-pointer">
+    <div class="w-48 bg-gray-800 rounded-lg overflow-hidden transform transition duration-300 hover:scale-110 hover:shadow-lg hover:shadow-purple-400 cursor-pointer"
+      data-src="assets/music/song_6.mp3">
       <img src="https://i.pinimg.com/originals/a5/d8/99/a5d8994d174e8b2e1095868e453d6fe1.jpg" class="w-full h-32 object-cover rounded" />
-      <div class="mt-2">
+      <div class="mt-2 flex flex-col items-center">
         <p class="text-white font-semibold text-sm break-words">Hamsafar</p>
         <p class="text-gray-400 text-xs break-words">Akhil Sachdeva</p>
+        <button class="play-btn w-24 bg-green-500 px-2 py-1 mt-2 text-sm rounded hover:bg-green-600 transition">Play</button>
       </div>
     </div>
 
-    <div class="w-48 bg-gray-800 rounded-lg overflow-hidden transform transition duration-300 hover:scale-110 hover:shadow-lg hover:shadow-pink-500 cursor-pointer">
+    <div class="w-48 bg-gray-800 rounded-lg overflow-hidden transform transition duration-300 hover:scale-110 hover:shadow-lg hover:shadow-pink-500 cursor-pointer"
+      data-src="assets/music/song_7.mp3">
       <img src="https://i.ytimg.com/vi/yyUodifWNxU/maxresdefault.jpg" class="w-full h-32 object-cover rounded" />
-      <div class="mt-2">
+      <div class="mt-2 flex flex-col items-center">
         <p class="text-white font-semibold text-sm break-words">Jugrafiya</p>
         <p class="text-gray-400 text-xs break-words">Udit Narayan & Shreya Ghoshal</p>
+        <button class="play-btn w-24 bg-green-500 px-2 py-1 mt-2 text-sm rounded hover:bg-green-600 transition">Play</button>
       </div>
     </div>
-    <div class="w-48 bg-gray-800 rounded-lg overflow-hidden transform transition duration-300 hover:scale-110 hover:shadow-lg hover:shadow-yellow-400 cursor-pointer">
+    <div class="w-48 bg-gray-800 rounded-lg overflow-hidden transform transition duration-300 hover:scale-110 hover:shadow-lg hover:shadow-yellow-400 cursor-pointer"
+      data-src="assets/music/song 9.mp3">
       <img src="https://tse3.mm.bing.net/th/id/OIP.GxXC_j84YHYDI3ZV0VVJXgHaE8?rs=1&pid=ImgDetMain&o=7&rm=3" class="w-full h-32 object-cover rounded" />
-      <div class="mt-2">
+      <div class="mt-2 flex flex-col items-center">
         <p class="text-white font-semibold text-sm break-words">Jeena Jeena</p>
         <p class="text-gray-400 text-xs break-words">Atif Aslam</p>
+        <button class="play-btn w-24 bg-green-500 px-2 py-1 mt-2 text-sm rounded hover:bg-green-600 transition">Play</button>
       </div>
     </div>
 
- <div class="w-48 bg-gray-800 rounded-lg overflow-hidden transform transition duration-300 hover:scale-110 hover:shadow-lg hover:shadow-green-400 cursor-pointer">
+ <div class="w-48 bg-gray-800 rounded-lg overflow-hidden transform transition duration-300 hover:scale-110 hover:shadow-lg hover:shadow-green-400 cursor-pointer"
+      data-src="assets/music/song_8.mp3">
       <img src="https://tse3.mm.bing.net/th/id/OIP.mjLcECoM9rCr8jpTbskPtQHaGe?rs=1&pid=ImgDetMain&o=7&rm=3" class="w-full h-32 object-cover rounded" />
-      <div class="mt-2">
+      <div class="mt-2 flex flex-col items-center">
         <p class="text-white font-semibold text-sm break-words">Tere Bin</p>
         <p class="text-gray-400 text-xs break-words">Rahat Fateh Ali Khan</p>
+        <button class="play-btn w-24 bg-green-500 px-2 py-1 mt-2 text-sm rounded hover:bg-green-600 transition">Play</button>
       </div>
     </div>
-
+      
+    <div class="w-48 bg-gray-800 rounded-lg overflow-hidden transform transition duration-300 hover:scale-110 hover:shadow-lg hover:shadow-purple-400 cursor-pointer"
+     data-src="assets/music/song_12.mp3">
+      <img src="assets1/pictures/pict_9.jpg" class="w-full h-32 object-cover rounded" />
+      <div class="mt-2 flex flex-col items-center">
+        <p class="text-white font-semibold text-sm break-words">oh Zaalima</p>
+        <p class="text-gray-400 text-xs break-words">Arijit Singh</p>
+        <button class="play-btn w-24 bg-green-500 px-2 py-1 mt-2 text-sm rounded hover:bg-green-600 transition">Play</button>
+      </div>
+    </div>
+     <div class="w-48 bg-gray-800 rounded-lg overflow-hidden transform transition duration-300 hover:scale-110 hover:shadow-lg hover:shadow-yellow-400 cursor-pointer"
+      data-src="assets/music/song_14.mp3">
+      <img src="assets1/pictures/pict_6.jpg" class="w-full h-32 object-cover rounded" />
+      <div class="mt-2 flex flex-col items-center">
+        <p class="text-white font-semibold text-sm break-words">Hamdard</p>
+        <p class="text-gray-400 text-xs break-words">Arijit Singh</p>
+        <button class="play-btn w-24 bg-green-500 px-2 py-1 mt-2 text-sm rounded hover:bg-green-600 transition">Play</button>
+      </div>
+     </div>
+     <div class="w-48 bg-gray-800 rounded-lg overflow-hidden transform transition duration-300 hover:scale-110 hover:shadow-lg hover:shadow-green-400 cursor-pointer"
+      data-src="assets/music/song_15.mp3">
+      <img src="assets1/pictures/pict_7.jpg" class="w-full h-32 object-cover rounded" />
+      <div class="mt-2 flex flex-col items-center">
+        <p class="text-white font-semibold text-sm break-words">Give me some sunshine</p>
+        <p class="text-gray-400 text-xs break-words">Suraj Jagan,Sharman Joshi</p>
+        <button class="play-btn w-24 bg-green-500 px-2 py-1 mt-2 text-sm rounded hover:bg-green-600 transition">Play</button>
+      </div>
+    </div>
+<div class="w-48 bg-gray-800 rounded-lg overflow-hidden transform transition duration-300 hover:scale-110 hover:shadow-lg hover:shadow-purple-400 cursor-pointer"
+      data-src="assets/music/song_16.mp3">
+      <img src="assets1/pictures/pict_8.jpg" class="w-full h-32 object-cover rounded" />
+      <div class="mt-2 flex flex-col items-center">
+        <p class="text-white font-semibold text-sm break-words">Dagabaaz re</p>
+        <p class="text-gray-400 text-xs break-words">Rahat Fateh Ali Khan,Shreya Ghoshal </p>
+        <button class="play-btn w-24 bg-green-500 px-2 py-1 mt-2 text-sm rounded hover:bg-green-600 transition">Play</button>
+      </div>
+    </div>
   </div>
+  
 </section>
 <!-- Popular Artists Section -->
 
@@ -365,11 +618,21 @@
     <div class="relative group py-4 border border-gray-700 rounded-lg hover:border-green-400 transition">
       <p class="text-2xl font-semibold group-hover:text-green-400 transition">Alok Jha</p>
       <p class="text-gray-400">Designer</p>
-      <img src="member_2.jpg"
+      <img src="member2.jpg"
            alt="Alok Jha"
            class="absolute -top-36 left-1/2 -translate-x-1/2 scale-0 group-hover:scale-100 transition-transform duration-500 w-32 h-32 rounded-full border-4 border-green-400 shadow-xl z-10 bg-[#0f1117]" />
     </div>
 <!-- Contact Section -->
+<!-- Contact Section -->
+
+</section>
+
+
+</div>
+
+
+<div>
+
 <section id="contact" class="py-20 px-6 bg-[#0f1117] text-white">
   <h2 class="text-4xl font-bold text-center mb-10 hover:text-green-400 transition duration-300 ease-in-out hover:shadow-[0_0_10px_#22c55e]">
     Contact Us
@@ -406,10 +669,7 @@
         </button>
       </div>
     </form>
-  </div>
-</section>
-
-
+  </div>
 
   <script>
     let count = 0;
@@ -445,5 +705,114 @@
   });
 
 </script>
+<!-- JavaScript -->
+<script>
+  const audio = document.getElementById("audio-player");
+  const playButtons = document.querySelectorAll(".play-btn");
+  let currentBtn = null;
+
+  playButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const card = btn.closest("div[data-src]");  // FIXED LINE
+      const songSrc = card.dataset.src;
+
+      if (audio.src.includes(songSrc) && !audio.paused) {
+        audio.pause();
+        btn.innerText = "Play";
+      } else {
+        audio.src = songSrc;
+        audio.play();
+
+        if (currentBtn && currentBtn !== btn) {
+          currentBtn.innerText = "Play";
+        }
+
+        btn.innerText = "Pause";
+        currentBtn = btn;
+      }
+
+      audio.onended = () => {
+        if (currentBtn) currentBtn.innerText = "Play";
+      };
+    });
+  });
+</script>
+<script>
+  const sections = document.querySelectorAll(".page-section");
+
+  const revealOnScroll = () => {
+    sections.forEach(section => {
+      const rect = section.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.8) {
+        section.classList.add("visible");
+      } else {
+        section.classList.remove("visible");
+      }
+    });
+  };
+
+  window.addEventListener("scroll", revealOnScroll);
+  window.addEventListener("load", revealOnScroll);
+
+  function openModal() {
+    document.getElementById('signInModal').classList.remove('hidden');
+    document.getElementById('loginMsg').textContent = '';
+  }
+
+  function closeModal() {
+    document.getElementById('signInModal').classList.add('hidden');
+    document.getElementById('loginMsg').textContent = '';
+  }
+
+  function handleLogin() {
+    const user = document.getElementById('username').value.trim();
+    const pass = document.getElementById('password').value.trim();
+    const msg = document.getElementById('loginMsg');
+
+    const validUser = "sonix";
+    const validPass = "12345";
+
+    if (!user || !pass) {
+      msg.textContent = "Please enter both username and password.";
+      return;
+    }
+
+    if (user === validUser && pass === validPass) {
+      msg.classList.remove('text-red-400');
+      msg.classList.add('text-green-400');
+      msg.textContent = "Login successful!";
+      setTimeout(() => {
+        closeModal();
+      }, 1000);
+    } else {
+      msg.classList.remove('text-green-400');
+      msg.classList.add('text-red-400');
+      msg.textContent = "Invalid credentials!";
+    }
+  }
+</script>
+
+<!-- Sign In Modal -->
+<div id="signInModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+  <div class="bg-[#1a1c22] text-white p-8 rounded-xl w-96 shadow-lg">
+    <h2 class="text-2xl mb-4 font-bold">Sign In</h2>
+
+    <input id="username" type="text" placeholder="Username"
+      class="w-full mb-3 px-4 py-2 rounded bg-[#2a2d33] focus:outline-none">
+
+    <input id="password" type="password" placeholder="Password"
+      class="w-full mb-3 px-4 py-2 rounded bg-[#2a2d33] focus:outline-none">
+
+    <p id="loginMsg" class="text-sm mt-2 text-red-400"></p>
+
+    <button onclick="handleLogin()"
+      class="w-full bg-gradient-to-r from-pink-500 to-purple-600 py-2 mt-2 rounded hover:opacity-90">
+      Log In
+    </button>
+
+    <button onclick="closeModal()" class="text-sm mt-4 text-pink-400 hover:underline">Cancel</button>
+  </div>
+</div>
+
 </body>
-</html> 
+</html>
